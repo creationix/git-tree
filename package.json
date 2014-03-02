@@ -1,0 +1,13 @@
+{
+  "name": "git-tree",
+  "version": "0.0.0",
+  "author": "Tim Caswell <tim@creationix.com>",
+  "main": "git-tree.js",
+  "license": "MIT",
+  "dependencies": {
+    "carallel": "git@github.com:creationix/carallel.git",
+    "jonParse": "git@github.com:creationix/jon-parse.git",
+    "pathJoin": "git@github.com:creationix/pathjoin.git",
+    "bodec": "git@github.com:creationix/bodec.git"
+  }
+}
