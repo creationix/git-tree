@@ -90,6 +90,19 @@ module.exports = function (platform) {
     },
   });
 
+  // Pending read functions
+  var readQueue = [];
+
+  // This stores to-be-saved changes
+  var pendingWrites = null;
+  // registered callbacks that want to know when the bulk write is done
+  var writeCallbacks = null;
+  // Flag to know if an actual write is in progress
+  var writing = false;
+
+  // Pending .gitmodules changes
+  var pendingChanges = {};
+
   // Export public interface
   return {
 
@@ -267,7 +280,6 @@ module.exports = function (platform) {
     });
   }
 
-
   function readCommit(path, callback) {
     if (!callback) return readCommit.bind(null, path);
     readEntry(path, function (err, entry) {
@@ -407,7 +419,6 @@ module.exports = function (platform) {
     });
   }
 
-
   function writeEntry(path, entry, callback) {
     if (!callback) return writeEntry.bind(null, path, entry);
     if (!pendingWrites) {
@@ -486,7 +497,6 @@ module.exports = function (platform) {
 
   // Define internal helper functions
   ////////////////////////////////////////////////////////////////////////////////
-
 
   // Given a path and commit entry, find the tree entry inside it.
   function commitToTree(path, entry, callback) {
@@ -585,19 +595,6 @@ module.exports = function (platform) {
     });
     return longest;
   }
-
-  // Pending read functions
-  var readQueue = [];
-
-  // This stores to-be-saved changes
-  var pendingWrites = null;
-  // registered callbacks that want to know when the bulk write is done
-  var writeCallbacks = null;
-  // Flag to know if an actual write is in progress
-  var writing = false;
-
-  // Pending .gitmodules changes
-  var pendingChanges = {};
 
   function writeEntries() {
     // Exclusive write lock
