@@ -6,8 +6,8 @@
   "license": "MIT",
   "dependencies": {
     "carallel": "git@github.com:creationix/carallel.git",
-    "jonParse": "git@github.com:creationix/jon-parse.git",
-    "pathJoin": "git@github.com:creationix/pathjoin.git",
+    "jon-parse": "git@github.com:creationix/jon-parse.git",
+    "pathjoin": "git@github.com:creationix/pathjoin.git",
     "bodec": "git@github.com:creationix/bodec.git"
   }
 }
