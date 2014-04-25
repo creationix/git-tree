@@ -537,10 +537,17 @@ module.exports = function (platform) {
     try {
       repo = platform.createRepo(config);
       var ref = config.ref || (config.ref = "refs/heads/master");
+    }
+    catch (err) { return callback(err); }
+    if (repo.initChain) return carallel(repo.initChain, onInit);
+    else return onInit();
+
+    function onInit(err) {
+      if (err) return callback(err);
+      if (repo.initChain) repo.initChain = null;
       if (config.head) onHead();
       else repo.readRef(ref, onHead);
     }
-    catch (err) { return callback(err); }
 
     function onHead(err, hash) {
       if (err) return callback(err);
