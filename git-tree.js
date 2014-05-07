@@ -1064,6 +1064,9 @@ function gitTree(storage) {
           if (mode === modes.commit) root = partial;
           index++;
         }
+        else {
+          return done(false);
+        }
       }
 
       return done(index >= parts.length);
