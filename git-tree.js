@@ -1066,9 +1066,6 @@ function gitTree(storage) {
         } else {
           break;
         }
-        else {
-          return done(false);
-        }
       }
 
       return done(index >= parts.length);
