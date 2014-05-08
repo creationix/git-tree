@@ -1063,6 +1063,8 @@ function gitTree(storage) {
           partial = newPath;
           if (mode === modes.commit) root = partial;
           index++;
+        } else {
+          break;
         }
         else {
           return done(false);
