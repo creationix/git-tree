@@ -258,7 +258,7 @@ module.exports = function (platform) {
     if (!callback) return readEntry.bind(null, path);
     // If there are any pending writes, wait for them to flush before reading.
     if (pendingWrites) {
-      readQueue.push(readEntry.bind(null, path, callback));
+      return readQueue.push(readEntry.bind(null, path, callback));
     }
     resolvePath(path, null, callback);
   }
