@@ -556,7 +556,6 @@ module.exports = function (platform) {
       if (!current) {
         if (config.head) current = config.head;
         else if (repo.fetch) {
-          console.log("FETCHING", config.ref, config.depth);
           return repo.fetch(config.ref, config.depth, onHead);
         }
         else return initEmpty(repo, null, onCurrent);
