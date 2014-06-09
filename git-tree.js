@@ -326,7 +326,8 @@ module.exports = function (platform) {
       }
       return callback(new Error("Invalid mode 0" + entry.mode.toString(8)));
 
-      function onTree(err, tree, hash) {
+      function onTree(err, tree) {
+        var hash = entry.hash;
         if (!tree) return callback(err || new Error("Missing tree " + hash));
         entry.mode = modes.tree;
         entry.hash = hash;
