@@ -553,12 +553,12 @@ module.exports = function (platform) {
     function onHead(err, hash) {
       if (err) return callback(err);
       if (hash) config.head = hash;
+      if (!config.head && repo.fetch) {
+        config.depth = config.depth || 1;
+        return repo.fetch(config.ref, config.depth, onHead);
+      }
       if (!current) {
         if (config.head) current = config.head;
-        else if (repo.fetch) {
-          config.depth = config.depth || 1;
-          return repo.fetch(config.ref, config.depth, onHead);
-        }
         else return initEmpty(repo, null, onCurrent);
       }
       config.current = current;
