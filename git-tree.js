@@ -243,6 +243,9 @@ module.exports = function (platform) {
         var config = configs[entry.root];
         hash = config.head;
       }
+      var repo = repos[entry.root];
+      repo.updateRef("refs/current", hash, noop);
+
       if (!hash) {
         return callback(new Error("Nothing to revert to"));
       }
@@ -559,10 +562,13 @@ module.exports = function (platform) {
         return repo.fetch(config.ref, config.depth, onHead);
       }
       if (!current) {
-        if (config.head) current = config.head;
+        if (config.head) {
+          current = config.head;
+        }
         else return initEmpty(repo, null, onCurrent);
       }
       config.current = current;
+      repo.updateRef("refs/current", current, noop);
       callback(null, repo, current);
     }
 
@@ -757,7 +763,7 @@ module.exports = function (platform) {
       Object.keys(currents).forEach(function (root) {
         var hash = currents[root];
         configs[root].current = hash;
-        repos[root].updateRef("refs/tags/current", hash, noop);
+        repos[root].updateRef("refs/current", hash, noop);
       });
       platform.saveConfig();
 
