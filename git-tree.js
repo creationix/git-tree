@@ -757,6 +757,7 @@ module.exports = function (platform) {
       Object.keys(currents).forEach(function (root) {
         var hash = currents[root];
         configs[root].current = hash;
+        repos[root].updateRef("refs/tags/current", hash, noop);
       });
       platform.saveConfig();
 
@@ -1251,4 +1252,9 @@ function gitTree(storage) {
       }
     }
   }
+}
+
+
+function noop(err) {
+  if (err) console.error(err.stack);
 }
