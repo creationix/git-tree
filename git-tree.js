@@ -807,7 +807,8 @@ module.exports = function (platform) {
         config[key] = extra[key];
       });
     }
-    if (configs[entry.root].github) config.github = true;
+    // if (configs[entry.root].github)
+    config.github = true;
     return livenConfig(config, entry.hash, function (err, repo, current) {
       if (err) return callback(err);
       if (entry.hash !== current) {
